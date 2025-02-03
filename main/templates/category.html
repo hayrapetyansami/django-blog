@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}
+  {% if request.LANGUAGE_CODE == 'hy' %}
+  {{cat.name_hy}}
+  {% elif request.LANGUAGE_CODE == 'ru' %}
+  {{cat.name_ru}}
+  {% else %}
+  {{cat.name_en}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1>
+    {% if request.LANGUAGE_CODE == 'hy' %}
+    {{cat.name_hy}}
+    {% elif request.LANGUAGE_CODE == 'ru' %}
+    {{cat.name_ru}}
+    {% else %}
+    {{cat.name_en}}
+    {% endif %}
+  </h1>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{{post.get_absolute_url}}">
+          {% if request.LANGUAGE_CODE == 'hy' %}
+            {{post.title_hy}}
+          {% elif request.LANGUAGE_CODE == 'ru' %}
+            {{post.title_ru}}
+          {% else %}
+            {{post.title_en}}
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

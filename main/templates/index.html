@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %} {% trans 'Home' %} {% endblock %}
+
+{% block content %}
+  <div>
+    <h2>{% trans "Latest posts" %}</h2>
+   
+    <ul>
+      {% for post in posts %}
+        <li>
+          <a href="{{ post.get_absolute_url }}">
+            {% if request.LANGUAGE_CODE == 'hy' %}
+              {{ post.title_hy }}
+            {% elif request.LANGUAGE_CODE == 'ru' %}
+              {{ post.title_ru }}
+            {% else %}
+              {{ post.title_en }}
+            {% endif %} 
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

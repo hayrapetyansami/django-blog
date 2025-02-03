@@ -1,0 +1,61 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE|default:'en-us' }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <a href="{% url 'index' %}">
+          {% trans "LogoTitle" %}
+        </a>
+      </div>
+      <div class="menu">
+        <ul>
+          <li>
+            <a href="{% url 'index' %}">
+              {% trans "Home" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'categories' %}">
+              {% trans "Categories" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'about' %}">
+              {% trans "About" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'contacts' %}">
+              {% trans "Contacts" %}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="lang">
+        <form action="{% url 'set_language' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <input type="submit" value="hy" name="language">
+          <input type="submit" value="ru" name="language">
+          <input type="submit" value="en" name="language">
+        </form>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+  <footer></footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

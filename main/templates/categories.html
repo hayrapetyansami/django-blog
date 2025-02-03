@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %} {% trans 'Categories' %} {% endblock %}
+
+{% block content %}
+  <h1>{% trans 'Categories' %}</h1>
+  <ul>
+    {% for cat in cats %}
+      <li>
+        <a href="{{cat.get_absolute_url}}">
+          {% if request.LANGUAGE_CODE == 'hy' %}
+            {{cat.name_hy}}
+          {% elif request.LANGUAGE_CODE == 'ru' %}
+            {{cat.name_ru}}
+          {% else %}
+            {{cat.name_en}}
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
